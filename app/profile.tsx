@@ -106,25 +106,33 @@ export default function Profile() {
 
         <View style={styles.divider} />
 
-        <TouchableOpacity style={styles.menuItem}>
-          <View style={styles.menuLeft}>
-            <FontAwesome5 name="file-invoice-dollar" size={18} color="#d4af37" />
-            <Text style={styles.menuText}>Histórico de pagamentos</Text>
-          </View>
-          <Ionicons name="chevron-forward" size={18} color="#888" />
-        </TouchableOpacity>
+        <TouchableOpacity
+  style={styles.menuItem}
+  onPress={() => router.push('/payment-history')}
+>
+  <View style={styles.menuLeft}>
+    <FontAwesome5 name="file-invoice-dollar" size={18} color="#d4af37" />
+    <Text style={styles.menuText}>Histórico de pagamentos</Text>
+  </View>
+
+  <Ionicons name="chevron-forward" size={18} color="#888" />
+</TouchableOpacity>
       </View>
 
       <Text style={styles.sectionTitle}>Configurações</Text>
 
       <View style={styles.menuCard}>
-        <TouchableOpacity style={styles.menuItem}>
-          <View style={styles.menuLeft}>
-            <Ionicons name="person-outline" size={20} color="#d4af37" />
-            <Text style={styles.menuText}>Editar perfil</Text>
-          </View>
-          <Ionicons name="chevron-forward" size={18} color="#888" />
-        </TouchableOpacity>
+        <TouchableOpacity
+  style={styles.menuItem}
+  onPress={() => router.push('/edit-profile' as any)}
+>
+  <View style={styles.menuLeft}>
+    <Ionicons name="person-outline" size={20} color="#d4af37" />
+    <Text style={styles.menuText}>Editar perfil</Text>
+  </View>
+
+  <Ionicons name="chevron-forward" size={18} color="#888" />
+</TouchableOpacity>
 
         <View style={styles.divider} />
 
