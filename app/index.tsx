@@ -87,9 +87,7 @@ export default function Login() {
           <Text style={styles.link}>Criar conta</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => router.push('/barber-register')}>
-          <Text style={styles.barberLink}>Sou barbeiro / Cadastrar barbearia</Text>
-        </TouchableOpacity>
+        
       </View>
     </KeyboardAvoidingView>
   );

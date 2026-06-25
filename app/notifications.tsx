@@ -1,6 +1,13 @@
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import React from 'react';
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 
 export default function Notifications() {
   const router = useRouter();
@@ -30,27 +37,75 @@ export default function Notifications() {
   ];
 
   return (
-    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
-      <TouchableOpacity style={styles.backButton} onPress={() => router.back()}>
-        <Ionicons name="arrow-back" size={22} color="#111" />
+    <ScrollView
+      style={styles.container}
+      showsVerticalScrollIndicator={false}
+    >
+      {/* BOTÃO VOLTAR */}
+      <TouchableOpacity
+        style={styles.backButton}
+        onPress={() => router.back()}
+      >
+        <Ionicons
+          name="arrow-back"
+          size={22}
+          color="#111"
+        />
       </TouchableOpacity>
 
-      <Text style={styles.title}>Notificações</Text>
-      <Text style={styles.subtitle}>Acompanhe novidades e lembretes do seu atendimento.</Text>
+      {/* TÍTULO */}
+      <Text style={styles.title}>
+        Notificações
+      </Text>
 
+      <Text style={styles.subtitle}>
+        Acompanhe novidades e lembretes do seu atendimento.
+      </Text>
+
+      {/* TOPO */}
+      <View style={styles.topActions}>
+        <Text style={styles.newBadge}>
+          3 novas notificações
+        </Text>
+
+        <TouchableOpacity>
+          <Text style={styles.readAll}>
+            Marcar todas como lidas
+          </Text>
+        </TouchableOpacity>
+      </View>
+
+      {/* NOTIFICAÇÕES */}
       {notificacoes.map((item) => (
-        <View key={item.id} style={styles.card}>
+        <View
+          key={item.id}
+          style={[
+            styles.card,
+            item.id === 1 && styles.highlightCard,
+          ]}
+        >
           <View style={styles.iconBox}>
-            <Ionicons name={item.icon as any} size={24} color="#d4af37" />
+            <Ionicons
+              name={item.icon as any}
+              size={24}
+              color="#d4af37"
+            />
           </View>
 
           <View style={{ flex: 1 }}>
             <View style={styles.row}>
-              <Text style={styles.cardTitle}>{item.title}</Text>
-              <Text style={styles.time}>{item.time}</Text>
+              <Text style={styles.cardTitle}>
+                {item.title}
+              </Text>
+
+              <Text style={styles.time}>
+                {item.time}
+              </Text>
             </View>
 
-            <Text style={styles.cardText}>{item.text}</Text>
+            <Text style={styles.cardText}>
+              {item.text}
+            </Text>
           </View>
         </View>
       ))}
@@ -65,6 +120,7 @@ const styles = StyleSheet.create({
     padding: 20,
     paddingTop: 50,
   },
+
   backButton: {
     width: 44,
     height: 44,
@@ -73,18 +129,44 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+
   title: {
     color: '#d4af37',
     fontSize: 30,
     fontWeight: '800',
     marginTop: 22,
   },
+
   subtitle: {
     color: '#aaa',
     marginTop: 8,
-    marginBottom: 22,
+    marginBottom: 20,
     lineHeight: 20,
   },
+
+  topActions: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 22,
+  },
+
+  newBadge: {
+    backgroundColor: '#1f1f1f',
+    color: '#d4af37',
+    paddingHorizontal: 14,
+    paddingVertical: 8,
+    borderRadius: 12,
+    fontWeight: '700',
+    fontSize: 12,
+  },
+
+  readAll: {
+    color: '#d4af37',
+    fontWeight: '700',
+    fontSize: 13,
+  },
+
   card: {
     backgroundColor: '#151515',
     borderRadius: 18,
@@ -93,8 +175,19 @@ const styles = StyleSheet.create({
     gap: 12,
     marginBottom: 14,
     borderWidth: 1,
-    borderColor: '#232323',
+    borderColor: '#2f2f2f',
+
+    shadowColor: '#000',
+    shadowOpacity: 0.3,
+    shadowRadius: 8,
+    elevation: 5,
   },
+
+  highlightCard: {
+    borderColor: '#d4af37',
+    backgroundColor: '#1a1a1a',
+  },
+
   iconBox: {
     width: 48,
     height: 48,
@@ -103,22 +196,26 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+
   row: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     gap: 8,
   },
+
   cardTitle: {
     color: '#fff',
     fontSize: 16,
     fontWeight: '800',
     flex: 1,
   },
+
   time: {
     color: '#d4af37',
     fontSize: 12,
     fontWeight: '700',
   },
+
   cardText: {
     color: '#aaa',
     fontSize: 13,
